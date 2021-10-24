@@ -8,25 +8,46 @@
         <th>Email</th>
         <th>Country</th>
         <th>City</th>
-        <th>Adressnp</th>
+        <th>Adress</th>
       </tr>
     </thead>
     <tbody>
-      <TableElement />
-      <TableElement />
-      <TableElement />
+      <TableElement 
+      v-for="contact in contacts"
+      :key="contact['id']"
+      :name="contact['name']"
+      :last_name="contact['last-name']"
+      :phone="contact['phone_number']"
+      :email="contact['email']"
+      :country="contact['country']"
+      :city="contact['city']"
+      :address="contact['address']"
+      />
     </tbody>
   </table>
 </template>
 
 <script>
+import { onMounted, computed } from 'vue';
+import { useStore } from 'vuex';
 import TableElement from './TableElement.vue';
 export default {
   components:{
     TableElement
   },
   setup() {
-    
+    const store = useStore();
+    const contacts = computed(()=>{
+      return store.getters.getContactsFromStore;
+    })
+
+    onMounted(()=>{
+      store.dispatch('getContactsFromApi')
+    })
+
+    return{
+      contacts
+    }
   },
 }
 </script>

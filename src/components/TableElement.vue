@@ -1,11 +1,18 @@
 <template>
   <tr>
-    <td>Contact Name</td>
-    <td>Contact Last Name</td>
-    <td>Contact Phone</td>
-    <td>Contact Email</td>
-    <td>Contact Country</td>
-    <td>Contact City</td>
-    <td>Contact Adress</td>
+    <td>{{name}}</td>
+    <td>{{last_name}}</td>
+    <td>{{phone}}</td>
+    <td>{{email}}</td>
+    <td>{{country}}</td>
+    <td>{{city}}</td>
+    <td>{{address}}</td>
   </tr>
 </template>
+
+
+<script>
+export default {
+    props:['name','last_name','phone', 'email', 'country', 'city', 'address']
+}
+</script>
