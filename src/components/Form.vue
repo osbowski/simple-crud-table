@@ -33,9 +33,9 @@
       <input type="text" id="city" placeholder="City" v-model="contact.city" />
       <input
         type="text"
-        id="adress"
-        placeholder="Adress"
-        v-model="contact.adress"
+        id="address"
+        placeholder="Address"
+        v-model="contact.address"
       />
     </div>
     <div class="form-actions">
@@ -47,8 +47,10 @@
 
 <script>
 import { reactive } from "vue";
+import { useStore } from "vuex";
 export default {
   setup() {
+    const store = useStore();
     const contact = reactive({
       id: null,
       name: null,
@@ -57,27 +59,25 @@ export default {
       email: null,
       country: null,
       city: null,
-      adress: null,
+      address: null,
       created_at: null,
       updated_at: null,
     });
 
     const addContact = () => {
       const newContact = {
-        id: contact.id ? contact.id : (Math.random() * 10000).toFixed(),
         name: contact.name,
         last_name: contact.last_name,
         phone_number: contact.phone_number,
         email: contact.email,
         country: contact.country,
         city: contact.city,
-        adress: contact.adress,
-        created_at: Date.now(),
-        updated_at: null,
+        address: contact.address
       };
       const confirmBox = confirm("Are you sure?");
       if (confirmBox) {
-        console.log(newContact);
+        store.dispatch('addContact', newContact)
+        store.dispatch("getContactsFromApi");
       } else {
         console.log("Contact adding canceled");
       }

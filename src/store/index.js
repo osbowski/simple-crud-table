@@ -23,13 +23,21 @@ export default createStore({
       }
     },
 
-    async addContactToApi(_, payload) {
+    async addContact(_, payload) {
       try {
         await axios.post("http://test01.varid.pl:4080/api/contact", payload);
       } catch (error) {
         console.error(error);
       }
     },
+
+    async deleteContact(_,payload){
+      try {
+        await axios.delete(`http://test01.varid.pl:4080/api/contact/delete/${payload}`);
+      } catch (error) {
+        console.error(error);
+      }
+    }
   },
   getters: {
     getContactsFromStore(state) {

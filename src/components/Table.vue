@@ -15,6 +15,7 @@
       <TableElement 
       v-for="contact in contacts"
       :key="contact['id']"
+      :id = "contact['id']"
       :name="contact['name']"
       :last_name="contact['last-name']"
       :phone="contact['phone_number']"
