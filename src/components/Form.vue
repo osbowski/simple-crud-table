@@ -77,7 +77,6 @@ export default {
       const confirmBox = confirm("Are you sure?");
       if (confirmBox) {
         store.dispatch('addContact', newContact)
-        store.dispatch("getContactsFromApi");
       } else {
         console.log("Contact adding canceled");
       }

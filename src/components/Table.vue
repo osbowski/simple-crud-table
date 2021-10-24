@@ -17,7 +17,7 @@
       :key="contact['id']"
       :id = "contact['id']"
       :name="contact['name']"
-      :last_name="contact['last-name']"
+      :last_name="contact['last_name']"
       :phone="contact['phone_number']"
       :email="contact['email']"
       :country="contact['country']"
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { onMounted, computed } from 'vue';
+import { onMounted, computed, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 import TableElement from './TableElement.vue';
 export default {
@@ -45,6 +45,10 @@ export default {
     onMounted(()=>{
       store.dispatch('getContactsFromApi')
     })
+
+   watchEffect(()=>{
+     store.dispatch('getContactsFromApi')
+   })
 
     return{
       contacts
