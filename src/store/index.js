@@ -1,31 +1,40 @@
-import { createStore } from 'vuex'
-import axios from 'axios'
+import { createStore } from "vuex";
+import axios from "axios";
 
 export default createStore({
   state: {
-    contacts:[]
+    contacts: [],
   },
   mutations: {
-    setContactsFromApi(state,payload){
-      state.contacts=[...payload];
-    }
+    setContactsFromApi(state, payload) {
+      state.contacts = [...payload];
+    },
   },
   actions: {
-    async getContactsFromApi(context){
-      try{
-        const response = await axios.get('http://test01.varid.pl:4080/api/contacts');
+    async getContactsFromApi(context) {
+      try {
+        const response = await axios.get(
+          "http://test01.varid.pl:4080/api/contacts"
+        );
         const contacts = response.data;
-       context.commit('setContactsFromApi', contacts)
-      }catch(error){
+        context.commit("setContactsFromApi", contacts);
+      } catch (error) {
         console.error(error);
       }
-    }
+    },
+
+    async addContactToApi(_, payload) {
+      try {
+        await axios.post("http://test01.varid.pl:4080/api/contact", payload);
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
-  getters:{
-    getContactsFromStore(state){
+  getters: {
+    getContactsFromStore(state) {
       return state.contacts;
-    }
+    },
   },
-  modules: {
-  }
-})
+  modules: {},
+});
