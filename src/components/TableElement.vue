@@ -8,7 +8,7 @@
     <td>{{ city }}</td>
     <td>{{ address }}</td>
     <td>
-      <button>Modify</button>
+      <button @click="sendDataToStore">Modify</button>
       <button @click="deleteContact">Delete</button>
     </td>
   </tr>
@@ -22,11 +22,15 @@ export default {
     const store = useStore();
     const deleteContact = () => {
       store.dispatch("deleteContact", props.id);
-      store.dispatch("getContactsFromApi");
     };
+
+    const sendDataToStore = ()=>{
+      store.dispatch('searchContactToModify', props.id)
+    }
 
     return {
       deleteContact,
+      sendDataToStore
     };
   },
 };

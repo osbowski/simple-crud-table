@@ -4,6 +4,7 @@ import axios from "axios";
 export default createStore({
   state: {
     contacts: [],
+    contactToModify:null
   },
   mutations: {
     setContactsFromApi(state, payload) {
@@ -48,12 +49,20 @@ export default createStore({
       } catch (error) {
         console.error(error);
       }
+    },
+
+    async searchContactToModify(context,payload){
+      const contactToModify = context.state.contacts.filter(contact=>contact.id === payload)
+      context.state.contactToModify = contactToModify;
     }
   },
   getters: {
     getContactsFromStore(state) {
       return state.contacts;
     },
+    getContactToModify(state){
+      return state.contactToModify;
+    }
   },
   modules: {},
 });

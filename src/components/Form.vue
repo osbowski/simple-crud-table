@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import { reactive } from "vue";
+import { reactive, watch } from "vue";
 import { useStore } from "vuex";
 export default {
   setup() {
@@ -63,6 +63,18 @@ export default {
       created_at: null,
       updated_at: null,
     });
+
+    watch(()=>store.getters.getContactToModify,()=>{
+      const newContact = store.state.contactToModify[0];
+      
+      for (let key in contact){
+        for(let newKey in newContact){
+          if(key===newKey){
+            contact[key] = newContact[newKey]
+          }
+        }
+      }
+    })
 
     const addContact = () => {
       const newContact = {

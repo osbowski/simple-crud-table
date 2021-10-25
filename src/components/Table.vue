@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import { onMounted, computed, watchEffect } from 'vue';
+import { computed, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 import TableElement from './TableElement.vue';
 export default {
@@ -40,10 +40,6 @@ export default {
     const store = useStore();
     const contacts = computed(()=>{
       return store.getters.getContactsFromStore;
-    })
-
-    onMounted(()=>{
-      store.dispatch('getContactsFromApi')
     })
 
    watchEffect(()=>{
