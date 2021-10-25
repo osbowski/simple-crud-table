@@ -1,4 +1,4 @@
-# Simple crud api
+# Simple crud table
 
 ## Project setup
 ```
