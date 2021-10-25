@@ -54,8 +54,8 @@ export default {
 };
 </script>
 <style scoped>
-.va-table--striped{
+.va-table--striped {
   max-width: 90vw;
-  margin:0 auto;
+  margin: 0 auto;
 }
 </style>
