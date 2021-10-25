@@ -97,7 +97,7 @@ export default {
       () => contactToModify.value,
       () => {
         const newContact = contactToModify.value;
-        // blockModify.value = false;
+        
 
         for (let key in contact) {
           for (let newKey in newContact) {
@@ -106,6 +106,8 @@ export default {
             }
           }
         }
+
+        blockModify.value = false;
       }
     );
 
@@ -131,7 +133,7 @@ export default {
         const confirmBox = confirm("Do you want save data as NEW contact?");
         if (confirmBox) {
           store.dispatch("addContact", newContact);
-          for(let key in contact){
+          for (let key in contact) {
             contact[key] = null;
           }
         } else {
@@ -141,9 +143,13 @@ export default {
     };
 
     const modifyContact = () => {
+      const contactToModify = {...contact}
       const confirmBox = confirm("Do you want to modify this contact?");
       if (confirmBox) {
-        store.dispatch("modifyContact", contact);
+        store.dispatch("modifyContact", contactToModify);
+       for (let key in contact) {
+          contact[key] = null;
+        }
       } else {
         console.log("Contact adding canceled");
       }
