@@ -11,10 +11,7 @@ export default {
 </script>
 <style>
 .wrapper {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 0 20%;
-  margin: 50px 0;
+  max-width: 50vw;
+  margin: 50px auto;
 }
 </style>

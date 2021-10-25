@@ -7,9 +7,9 @@
     <td>{{ country }}</td>
     <td>{{ city }}</td>
     <td>{{ address }}</td>
-    <td>
-      <button @click="sendDataToStore">Modify</button>
-      <button @click="deleteContact">Delete</button>
+    <td class="action-column">
+      <va-button flat class="mb-1" size="small" outline @click="sendDataToStore">Modify</va-button>
+      <va-button flat  class="mb-1"  color="danger" size="small" @click="deleteContact">Delete</va-button>
     </td>
   </tr>
 </template>
@@ -42,3 +42,14 @@ export default {
   },
 };
 </script>
+<style scoped>
+td{
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px;
+}
+
+.action-column{
+  display: flex;
+}
+</style>
