@@ -1,4 +1,4 @@
-# varid-crud-api
+# Simple crud api
 
 ## Project setup
 ```
