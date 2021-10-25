@@ -16,6 +16,10 @@ export default createStore({
     deleteContact(state,payload){
       const index = state.contacts.findIndex(contact=>contact.id===payload)
       state.contacts.splice(index,1)
+    },
+    modifyContact(state,payload){
+      const index = state.contacts.findIndex(contact=>contact.id === payload.id);
+      state.contacts.splice(index,1,payload)
     }
   },
   actions: {
@@ -52,8 +56,13 @@ export default createStore({
     },
 
     async searchContactToModify(context,payload){
-      const contactToModify = context.state.contacts.filter(contact=>contact.id === payload)
+      const contactToModify = context.state.contacts.find(contact=>contact.id === payload)
       context.state.contactToModify = contactToModify;
+    },
+
+    async modifyContact(context,payload){
+      await axios.put(`http://test01.varid.pl:4080/api/contact/${payload.id}`, payload)
+      context.commit('modifyContact',payload)
     }
   },
   getters: {

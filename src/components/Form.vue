@@ -40,13 +40,13 @@
     </div>
     <div class="form-actions">
       <button @click.prevent="addContact">Add new item</button>
-      <button>Modify item</button>
+      <button @click.prevent="modifyContact">Modify item</button>
     </div>
   </form>
 </template>
 
 <script>
-import { reactive, watch } from "vue";
+import { reactive, watch, computed } from "vue";
 import { useStore } from "vuex";
 export default {
   setup() {
@@ -64,17 +64,22 @@ export default {
       updated_at: null,
     });
 
-    watch(()=>store.getters.getContactToModify,()=>{
-      const newContact = store.state.contactToModify[0];
-      
-      for (let key in contact){
-        for(let newKey in newContact){
-          if(key===newKey){
-            contact[key] = newContact[newKey]
+    const contactToModify = computed(() => store.getters.getContactToModify);
+
+    watch(
+      () => contactToModify.value,
+      () => {
+        const newContact = contactToModify.value;
+
+        for (let key in contact) {
+          for (let newKey in newContact) {
+            if (key === newKey) {
+              contact[key] = newContact[newKey];
+            }
           }
         }
       }
-    })
+    );
 
     const addContact = () => {
       const newContact = {
@@ -84,19 +89,30 @@ export default {
         email: contact.email,
         country: contact.country,
         city: contact.city,
-        address: contact.address
+        address: contact.address,
       };
-      const confirmBox = confirm("Are you sure?");
+      const confirmBox = confirm("Do you want save data as NEW contact?");
       if (confirmBox) {
-        store.dispatch('addContact', newContact)
+        store.dispatch("addContact", newContact);
       } else {
         console.log("Contact adding canceled");
       }
     };
 
+    const modifyContact = () => {
+      const confirmBox = confirm("Do you want to modify this contact?");
+      if (confirmBox) {
+        store.dispatch("modifyContact", contact);
+      } else {
+        console.log("Contact adding canceled");
+      }
+      
+    };
+
     return {
       contact,
       addContact,
+      modifyContact,
     };
   },
 };
