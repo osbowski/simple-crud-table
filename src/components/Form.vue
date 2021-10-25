@@ -56,7 +56,10 @@
             <va-button outline @click.prevent="addContact"
               >Add new item</va-button
             >
-            <va-button flat @click.prevent="modifyContact"
+            <va-button
+              :disabled="!!blockModify"
+              flat
+              @click.prevent="modifyContact"
               >Modify item</va-button
             >
           </div>
@@ -74,6 +77,7 @@ export default {
   setup() {
     const store = useStore();
     const isNotValid = ref(false);
+    const blockModify = ref(true);
     const contact = reactive({
       id: null,
       name: null,
@@ -93,6 +97,7 @@ export default {
       () => contactToModify.value,
       () => {
         const newContact = contactToModify.value;
+        // blockModify.value = false;
 
         for (let key in contact) {
           for (let newKey in newContact) {
@@ -119,13 +124,18 @@ export default {
         if (newContact[key] === null) {
           isNotValid.value = true;
           return;
-        } else {
-          const confirmBox = confirm("Do you want save data as NEW contact?");
-          if (confirmBox) {
-            store.dispatch("addContact", newContact);
-          } else {
-            console.log("Contact adding canceled");
+        }
+      }
+
+      if (isNotValid.value === false) {
+        const confirmBox = confirm("Do you want save data as NEW contact?");
+        if (confirmBox) {
+          store.dispatch("addContact", newContact);
+          for(let key in contact){
+            contact[key] = null;
           }
+        } else {
+          console.log("Contact adding canceled");
         }
       }
     };
@@ -142,6 +152,7 @@ export default {
     return {
       contact,
       isNotValid,
+      blockModify,
       addContact,
       modifyContact,
     };
