@@ -1,8 +1,12 @@
 <template>
-  <form>
+<div class="wrapper">
+<va-card>
+  <va-card-title class="display-5 justify--center">Data form</va-card-title>
+  <va-card-content>
+    <va-form>
     <div class="form-control">
-      <input type="text" id="name" placeholder="Name" v-model="contact.name" />
-      <input
+      <va-input type="text" id="name" placeholder="Name" v-model="contact.name" />
+      <va-input
         type="text"
         id="lastname"
         placeholder="Last Name"
@@ -10,13 +14,13 @@
       />
     </div>
     <div class="form-control">
-      <input
+      <va-input
         type="phone"
         id="phonenumber"
         placeholder="Phone Number"
         v-model="contact.phone_number"
       />
-      <input
+      <va-input
         type="email"
         id="email"
         placeholder="Email"
@@ -24,25 +28,28 @@
       />
     </div>
     <div class="form-control">
-      <input
+      <va-input
         type="text"
         id="country"
         placeholder="Country"
         v-model="contact.country"
       />
-      <input type="text" id="city" placeholder="City" v-model="contact.city" />
-      <input
+      <va-input type="text" id="city" placeholder="City" v-model="contact.city" />
+      <va-input
         type="text"
         id="address"
         placeholder="Address"
         v-model="contact.address"
       />
     </div>
-    <div class="form-actions">
-      <button @click.prevent="addContact">Add new item</button>
-      <button @click.prevent="modifyContact">Modify item</button>
+    <div class="form-control form-control--actions">
+      <va-button outline @click.prevent="addContact">Add new item</va-button>
+      <va-button flat @click.prevent="modifyContact">Modify item</va-button>
     </div>
-  </form>
+  </va-form>
+  </va-card-content>
+</va-card>
+</div>
 </template>
 
 <script>
@@ -117,3 +124,18 @@ export default {
   },
 };
 </script>
+<style scoped>
+.form-control{
+  display: flex;
+  padding: 5px;
+}
+
+.form-control--actions{
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.va-input{
+  padding: 5px;
+}
+</style>

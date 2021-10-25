@@ -3,14 +3,13 @@
     <Table />
 </template>
 
-
 <script>
-import Form from '../components/Form.vue';
-import Table from '../components/Table.vue';
+import Form from "../components/Form.vue";
+import Table from "../components/Table.vue";
 export default {
-    components:{
-        Form,
-        Table
-    }
-}
+  components: {
+    Form,
+    Table,
+  },
+};
 </script>

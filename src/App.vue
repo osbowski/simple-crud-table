@@ -1,16 +1,20 @@
 <template>
-  <!-- <div id="nav">
-    <router-link to="/">Home</router-link> |
-  </div>
-  <router-view/> -->
   <Home />
 </template>
 <script>
-import Home from './view/Home.vue';
+import Home from "./view/Home.vue";
 export default {
-  components:{
-    Home
-  }
-}
+  components: {
+    Home,
+  },
+};
 </script>
-<style></style>
+<style>
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 20%;
+  margin: 50px 0;
+}
+</style>
