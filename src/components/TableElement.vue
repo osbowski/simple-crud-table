@@ -21,6 +21,13 @@ export default {
   setup(props) {
     const store = useStore();
     const deleteContact = () => {
+            const confirmBox = confirm("Do you want delete this contact?");
+      if (confirmBox) {
+        store.dispatch("deleteContact", props.id);
+      } else {
+        console.log("Contact delete canceled");
+      }
+
       store.dispatch("deleteContact", props.id);
     };
 
