@@ -14,4 +14,10 @@ export default {
   max-width: 50vw;
   margin: 50px auto;
 }
+
+.text-alert{
+  text-align: center;
+  color:red;
+  padding: 10px;
+}
 </style>
