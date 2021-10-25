@@ -1,6 +1,6 @@
 <template>
-    <Form />
-    <Table />
+  <Form />
+  <Table />
 </template>
 
 <script>

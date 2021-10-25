@@ -15,9 +15,9 @@ export default {
   margin: 50px auto;
 }
 
-.text-alert{
+.text-alert {
   text-align: center;
-  color:red;
+  color: red;
   padding: 10px;
 }
 </style>
