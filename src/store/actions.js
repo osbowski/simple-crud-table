@@ -46,7 +46,6 @@ export default {
 
   async modifyContact(context, payload) {
     const contactToModify = { ...payload };
-    console.log(contactToModify);
     await axios.put(
       `http://test01.varid.pl:4080/api/contact/${contactToModify.id}`,
       contactToModify
