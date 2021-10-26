@@ -1,5 +1,6 @@
 <template>
-  <table class="va-table--striped">
+<va-inner-loading v-if="isLoading" :loading="isLoading" :size="100"></va-inner-loading>
+  <table v-else class="va-table--striped">
     <thead>
       <tr>
         <th>Name</th>
@@ -30,7 +31,7 @@
 </template>
 
 <script>
-import { computed, watchEffect } from "vue";
+import { computed, watchEffect, ref } from "vue";
 import { useStore } from "vuex";
 import TableElement from "./TableElement.vue";
 export default {
@@ -39,16 +40,23 @@ export default {
   },
   setup() {
     const store = useStore();
+    const isLoading = ref(false);
+
     const contacts = computed(() => {
       return store.getters.getContactsFromStore;
     });
 
-    watchEffect(() => {
-      store.dispatch("getContactsFromApi");
+    watchEffect(async() => {
+      isLoading.value = true;
+      await store.dispatch("getContactsFromApi");
+      isLoading.value = false;
     });
+
+    
 
     return {
       contacts,
+      isLoading
     };
   },
 };
@@ -57,5 +65,9 @@ export default {
 .va-table--striped {
   max-width: 90vw;
   margin: 0 auto;
+}
+
+.inner-loading{
+  margin-top:100px;
 }
 </style>

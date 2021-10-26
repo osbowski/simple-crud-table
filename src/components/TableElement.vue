@@ -25,7 +25,6 @@
 
 <script>
 import { useStore } from "vuex";
-import confirmBox from "../utilies/confirmBox";
 export default {
   props: [
     "name",
@@ -40,11 +39,12 @@ export default {
   setup(props) {
     const store = useStore();
     const deleteContact = () => {
-      confirmBox(
-        null,
-        "Do you want delete this contact?",
-        store.dispatch("deleteContact", props.id)
-      );
+      const confirmBox = confirm("Do you want delete this contact?");
+      if (confirmBox) {
+        store.dispatch("deleteContact", props.id);
+      } else {
+        console.log("Contact adding canceled");
+      }
     };
 
     const sendDataToStore = () => {

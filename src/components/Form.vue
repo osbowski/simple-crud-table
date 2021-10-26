@@ -73,7 +73,6 @@
 <script>
 import { reactive, watch, computed, ref } from "vue";
 import { useStore } from "vuex";
-import confirmBox from "../utilies/confirmBox.js";
 export default {
   setup() {
     const store = useStore();
@@ -131,21 +130,30 @@ export default {
       }
 
       if (isNotValid.value === false) {
-        confirmBox(
-          contact,
-          "Do you want save data as NEW contact?",
-          store.dispatch("addContact", newContact)
-        );
+        const confirmBox = confirm("Do you want save data as NEW contact?");
+        if (confirmBox) {
+          store.dispatch("addContact", newContact);
+          for (let key in contact) {
+            contact[key] = null;
+          }
+        } else {
+          console.log("Contact adding canceled");
+        }
       }
     };
 
     const modifyContact = () => {
       const contactToModify = { ...contact };
-      confirmBox(
-        contact,
-        "Do you want to modify this contact?",
-        store.dispatch("modifyContact", contactToModify)
-      );
+
+      const confirmBox = confirm("Do you want to modify this contact?");
+      if (confirmBox) {
+        store.dispatch("modifyContact", contactToModify);
+        for (let key in contact) {
+          contact[key] = null;
+        }
+      } else {
+        console.log("Contact adding canceled");
+      }
     };
 
     return {
